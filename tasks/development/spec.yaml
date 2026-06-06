@@ -7,10 +7,13 @@ task_dir: "tasks/development"
 executor: "claude"
 deliverables:
   - path: "Cargo.toml"
+    verify: 'grep -q "^\[package\]" Cargo.toml'
   - path: "src/main.rs"
-    verify: 'cargo build && cargo run -- "hello world hello" | grep -Fxq "Total: 3"'
+    verify: 'cargo build && [ "$(cargo run -q -- "hello world hello" 2>/dev/null)" = "$(printf "word: hello\nword: world\nword: hello\nTotal: 3")" ]'
   - path: "tasks/development/CLAUDE.md"
     verify: 'git diff --quiet origin/main -- tasks/development/'
+  - path: "docs/DELIVERY.md"
+    verify: 'git diff --quiet origin/main -- docs/'
 execution:
   poll_interval_sec: 2
   idle_timeout_sec: 30
