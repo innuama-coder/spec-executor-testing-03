@@ -1,29 +1,27 @@
-# PROMPT.md — word-count (universal first instruction)
+# PROMPT.md
 
-> Sent as the first user message to whichever executor is launched,
-> via `send_input`.
+## 任务目标
 
----
+开始执行 `word-count` 任务。在空仓库中创建 Rust binary crate，实现命令行词元统计程序。
 
-Begin the **word-count** task.
+## 必读上下文
 
-This repository has no Rust code. Create a binary crate from scratch
-that reads command-line arguments and outputs each token on its own
-`word: <token>` line followed by `Total: N`.
+1. `docs/PRD.md`
+2. `docs/HLD.md`
+3. `docs/LLD.md`
+4. `CLAUDE.md` 或 `AGENTS.md`
 
-Read your working agreement: `CLAUDE.md` (claude) or `AGENTS.md`
-(codex) at the worktree root.
+## 交付物
 
-Steps:
-1. Create `Cargo.toml` and `src/main.rs`.
-2. Implement argument parsing via `std::env::args().skip(1)` and
-   whitespace splitting.
-3. Output `word: <token>` for each token, then `Total: N`.
-4. Run `cargo build` and test with `cargo run -- "hello world hello"`.
-5. Confirm `Total: 3` on the last line, then stop.
+- `Cargo.toml`
+- `src/main.rs`
 
-Constraints (full list in your agreement file):
-- Standard library only. No external dependencies such as `clap`.
-- Do not touch `tasks/development/`, `docs/`, `spec.yaml`,
-  `README.md`, `.gitignore`.
-- Do not add a `rust-toolchain.toml`.
+## 验收标准
+
+- `cargo build` 成功。
+- `cargo run -q -- "hello world hello"` 输出三行词元和 `Total: 3`。
+- 不修改 `tasks/development/`、`docs/`、`README.md`、`.gitignore` 或 `spec.yaml`。
+
+## Handoff
+
+最终回复包含修改摘要、验证命令和验证结果。

@@ -1,48 +1,20 @@
-# AGENTS.md — word-count (codex executor)
+# AGENTS.md - word-count
 
-> Loaded by spec-executor 2.0 when `executor: codex`. Copied to
-> the worktree root during StartingExecutor. PROMPT.md is sent as
-> the first user message via `send_input`.
+## 工作协议
 
-## Task
+你正在执行 `spec-executor-testing-03` 的 Rust CLI 开发任务。请读取工作文档后实现。
 
-Create a Rust binary crate from scratch. The repository has no Rust
-code as baseline — produce `Cargo.toml` and `src/main.rs` that reads
-command-line arguments and outputs:
+## 任务目标
 
-```
-word: <token>
-word: <token>
-Total: N
-```
+创建命令行程序，按顺序输出词元行和总数行。
 
-## Constraints
+## 约束
 
-- Create `Cargo.toml` and `src/main.rs` at the repo root.
-- Standard library only. No external dependencies such as `clap`.
-- Do not modify `tasks/development/`, `docs/`, `spec.yaml`,
-  `README.md`, `.gitignore`.
-- No `rust-toolchain.toml`.
-- Output format must match exactly. The verifier runs
-  `cargo run -- "hello world hello" | grep -Fxq "Total: 3"`.
+- 仅使用 Rust 标准库。
+- 不引入 `clap` 等外部依赖。
+- 不新增 `rust-toolchain.toml`。
+- 不修改 `tasks/development/`、`docs/`、`README.md`、`.gitignore` 或 `spec.yaml`。
 
-## Self-Verification (mandatory)
+## 完成标准
 
-```
-cargo build
-cargo run -- "hello world hello"
-```
-
-## Definition of Done
-
-1. `Cargo.toml` exists.
-2. `src/main.rs` exists; `cargo build` exits 0.
-3. `cargo run -- "hello world hello"` prints `Total: 3` on its
-   last line.
-4. `tasks/development/` is byte-identical to the baseline.
-
-## Out of Scope
-
-- Refactoring, comments, tests, benchmarks, examples.
-- Adding CI, README, or `LICENSE` files.
-- External dependencies.
+`cargo build` 通过，示例命令输出符合 PRD。
